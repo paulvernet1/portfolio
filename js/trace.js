@@ -7,7 +7,7 @@
 // Les posts sont lus dans la liste <ul class="posts"> de index.html.
 (function () {
   // ---------- Réglages ----------
-  var ESPACEMENT = 80;      // distance (px maquette) à parcourir avant une nouvelle image
+  var ESPACEMENT = 130;     // distance (px maquette) à parcourir avant une nouvelle image (plus grand = plus espacé)
   var DUREE_VIE = 900;      // ms avant qu’une image de la trace commence à s’effacer
   var DELAI_POSE = 260;     // ms d’arrêt du curseur avant que la dernière image reste posée
   var MAX_IMAGES = 16;      // nombre maximum d’images à l’écran
@@ -19,7 +19,7 @@
 
   var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var unite = function () { return window.innerWidth / 1728; };
-  var espacement = function () { return Math.max(45, ESPACEMENT * unite()); };
+  var espacement = function () { return Math.max(70, ESPACEMENT * unite()); };
 
   // ---------- Préchargement ----------
   // Chaque image est téléchargée et décodée à l’avance : une image n’entre
