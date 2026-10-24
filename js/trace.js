@@ -7,7 +7,7 @@
 // Les posts sont lus dans la liste <ul class="posts"> de index.html.
 (function () {
   // ---------- Réglages ----------
-  var ESPACEMENT = 110;     // distance (px maquette) à parcourir avant une nouvelle image
+  var ESPACEMENT = 80;      // distance (px maquette) à parcourir avant une nouvelle image
   var DUREE_VIE = 900;      // ms avant qu’une image de la trace commence à s’effacer
   var DELAI_POSE = 260;     // ms d’arrêt du curseur avant que la dernière image reste posée
   var MAX_IMAGES = 16;      // nombre maximum d’images à l’écran
@@ -19,17 +19,37 @@
 
   var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var unite = function () { return window.innerWidth / 1728; };
-  var espacement = function () { return Math.max(60, ESPACEMENT * unite()); };
+  var espacement = function () { return Math.max(45, ESPACEMENT * unite()); };
 
   // ---------- Préchargement ----------
+  // Chaque image est téléchargée et décodée à l’avance : une image n’entre
+  // dans la trace qu’une fois prête, pour qu’elle s’affiche instantanément
+  // (en ligne, sinon, on bougerait la souris sans rien voir apparaître).
   var posts = liens.map(function (a) {
     var media = a.querySelector('img, video');
-    if (media && media.tagName === 'IMG') { var i = new Image(); i.src = media.getAttribute('src'); }
-    return { href: a.getAttribute('href'), media: media };
+    var post = { href: a.getAttribute('href'), media: media, pret: false };
+    if (!media) return post;
+    if (media.tagName === 'IMG') {
+      var i = new Image();
+      i.src = media.getAttribute('src');
+      var fini = function () { post.pret = i.naturalWidth > 0; };
+      (i.decode ? i.decode() : Promise.reject()).then(fini, function () { i.onload = fini; if (i.complete) fini(); });
+    } else {
+      if (media.readyState >= 2) post.pret = true;
+      media.addEventListener('loadeddata', function () { post.pret = true; }, { once: true });
+      media.load();
+    }
+    return post;
   }).filter(function (p) { return p.media; });
 
   var index = Math.floor(Math.random() * posts.length);
-  function suivant() { index = (index + 1) % posts.length; return posts[index]; }
+  function suivant() {
+    for (var k = 0; k < posts.length; k++) {
+      index = (index + 1) % posts.length;
+      if (posts[index].pret) return posts[index];
+    }
+    return null;                            // rien n’est encore chargé
+  }
 
   // ---------- Création d’une image ----------
   var traces = [];          // images à l’écran, de la plus ancienne à la plus récente
@@ -37,6 +57,7 @@
 
   function creer(x, y) {
     var post = suivant();
+    if (!post) return null;
     var el = document.createElement('a');
     el.className = 'trace';
     el.href = post.href;
@@ -114,18 +135,26 @@
   }
 
   // ---------- Suivi du curseur ----------
-  var dernier = null;       // dernière position où une image a été créée
+  var dernier = null;       // dernière position du curseur
+  var parcouru = 0;         // distance parcourue depuis la dernière image
   var minuteurPose = null;
   var derniereTrace = null;
 
+  // On additionne tout le chemin parcouru par le curseur (et pas seulement
+  // la distance à vol d’oiseau) : même de petits mouvements finissent par
+  // faire apparaître une image.
   function deplacer(x, y) {
-    if (!dernier) { dernier = { x: x, y: y }; }
-    var dx = x - dernier.x, dy = y - dernier.y;
-    if (dx * dx + dy * dy >= espacement() * espacement()) {
-      liberer();
-      derniereTrace = creer(x, y);
-      programmerSortie(derniereTrace, DUREE_VIE);
-      dernier = { x: x, y: y };
+    if (!dernier) dernier = { x: x, y: y };
+    parcouru += Math.hypot(x - dernier.x, y - dernier.y);
+    dernier = { x: x, y: y };
+    if (parcouru >= espacement()) {
+      var t = creer(x, y);
+      if (t) {
+        liberer();
+        derniereTrace = t;
+        programmerSortie(t, DUREE_VIE);
+        parcouru = 0;
+      }
     }
     clearTimeout(minuteurPose);
     minuteurPose = setTimeout(function () { poser(derniereTrace); }, DELAI_POSE);
@@ -143,10 +172,13 @@
   scene.addEventListener('pointerdown', function (ev) {
     if (ev.pointerType === 'mouse') return;
     if (surPosee(ev.target)) return;        // toucher une image posée : le lien s’ouvre
+    var t = creer(ev.clientX, ev.clientY);
+    if (!t) return;
     liberer();
-    derniereTrace = creer(ev.clientX, ev.clientY);
+    derniereTrace = t;
     dernier = { x: ev.clientX, y: ev.clientY };
-    poser(derniereTrace);
+    parcouru = 0;
+    poser(t);
   });
 
 })();

@@ -1,0 +1,14 @@
+Images et vidéos des posts.
+
+Pour ajouter un post : dans index.html, copiez une ligne <li> de la liste
+<ul class="posts"> et changez le lien (href) et l’image (src).
+Les images apparaissent dans cet ordre quand on bouge la souris.
+
+- Images : JPG ou WebP, environ 540 px de haut suffisent (2x), idéalement
+  moins de 200 Ko chacune pour que la trace reste fluide.
+- Vidéos : MP4 (H.264), courtes, sans son, moins de 2 Mo.
+- Remplissez alt="" avec le titre de l’article (accessibilité, référencement).
+
+Réglages (haut de js/trace.js) : espacement entre les images, durée de vie,
+délai avant qu’une image reste posée, nombre maximum d’images, inclinaison.
+Taille des images et du logo : --trace-h et --logo-w en haut de css/style.css.
