@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Paul Vernet – Journaliste culturel, Paris</title>
+  <meta name="description" content="Paul Vernet, journaliste culturel basé à Paris, actuellement en poste chez Views.">
+  <link rel="preload" href="fonts/Ronzino-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <!-- Logo fixe, au centre -->
+    <h1 class="logo"><img src="images/logo.png" alt="Paul Vernet" width="1155" height="490"></h1>
+
+    <!-- Zone où apparaissent les images quand on bouge la souris ou qu’on clique -->
+    <div class="scene" aria-hidden="true"></div>
+
+    <!-- Liste des posts : le script pioche dedans, dans cet ordre.
+         Pour ajouter un post, copiez une ligne <li> et changez le lien et l’image.
+         Les vidéos fonctionnent aussi (balise <video>). -->
+    <ul class="posts" aria-label="Articles">
+      <li><a href="https://views.fr/blogs/interviews/aupinard-les-gens-qui-essaient-de-plaire-a-tout-le-monde-a-la-fin-ils-ne-plaisent-a-personne?srsltid=AU7gw4UsB_5wBky0v8LehTDpmDiozGQ1cUYmYKnKbFw7vWTBo8Isp5la"><img src="images/aupinard.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DXUovqrDcxI/?img_index=1"><img src="images/mocassins.jpg" alt=""></a></li>
+      <li><a href="https://paulvernet.substack.com/p/la-typographie-comme-outil-de-pouvoir"><img src="images/typographie.jpg" alt=""></a></li>
+      <li><a href="https://paulvernet.substack.com/p/la-bande-originale-de-samuel-est"><img src="images/samuel.jpg" alt=""></a></li>
+      <li><a href="https://views.fr/blogs/interviews/marguerite-il-faut-faire-attention-a-rester-aligne-avec-ses-valeurs"><img src="images/marguerite.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DdT4yUxjGsH/?img_index=1"><img src="images/big-three.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DYxJCKRjGXF/?img_index=1"><video src="images/cannes.mp4" muted loop playsinline preload="auto"></video></a></li>
+      <li><a href="https://www.instagram.com/p/DXhM573DHN9/?img_index=1"><img src="images/seixas.jpg" alt=""></a></li>
+      <li><a href="https://substack.com/home/post/p-220758422"><img src="images/angele.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DU6XFaxjCFp/?img_index=1"><img src="images/odessa.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DSnaU2DDM3A/?img_index=1"><img src="images/van-gogh.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DcOrOB5DF3g/?img_index=1"><img src="images/renate.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DdHUpVXjFsp/?img_index=1"><img src="images/dix-pour-cent.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DSdE1TIDCWs/"><img src="images/gasly.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DZF_hG-jFlM/?img_index=1"><img src="images/oklou.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DZIU3OUjcS9/?img_index=1"><img src="images/josephine.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DVOfZrijLq2/"><img src="images/marbeck.jpg" alt=""></a></li>
+      <li><a href="https://www.instagram.com/p/DWtKMYiDLnq/?img_index=1"><img src="images/terre-battue.jpg" alt=""></a></li>
+      <li><a href="https://paulvernet.substack.com/p/des-pommes-des-baigneurs-and-la-sainte"><img src="images/cezanne.jpg" alt=""></a></li>
+    </ul>
+  </main>
+  <footer>
+    <div class="reseaux">
+      <a href="https://www.instagram.com/paul.vrnt/" aria-label="Instagram" target="_blank" rel="noopener"><svg width="25" height="24" viewBox="0 0 25 23.9438" fill="currentColor" aria-hidden="true"><path d="M18.7436 0H6.25636C2.80653 0 0 2.80736 0 6.25821V17.6856C0 21.1365 2.80653 23.9438 6.25636 23.9438H18.7436C22.1935 23.9438 25 21.1365 25 17.6856V6.25821C25 2.80736 22.1935 0 18.7436 0ZM2.20705 6.25821C2.20705 4.02505 4.02387 2.2077 6.25636 2.2077H18.7436C20.9761 2.2077 22.793 4.02505 22.793 6.25821V17.6856C22.793 19.9188 20.9761 21.7361 18.7436 21.7361H6.25636C4.02387 21.7361 2.20705 19.9188 2.20705 17.6856V6.25821Z"/><path d="M12.5 17.7918C15.7081 17.7918 18.3195 15.181 18.3195 11.9706C18.3195 8.76013 15.7095 6.14937 12.5 6.14937C9.29052 6.14937 6.68052 8.76013 6.68052 11.9706C6.68052 15.181 9.29052 17.7918 12.5 17.7918ZM12.5 8.35848C14.4921 8.35848 16.1124 9.97925 16.1124 11.972C16.1124 13.9647 14.4921 15.5855 12.5 15.5855C10.5079 15.5855 8.88757 13.9647 8.88757 11.972C8.88757 9.97925 10.5079 8.35848 12.5 8.35848Z"/><path d="M18.8582 7.08985C19.7221 7.08985 20.4262 6.38695 20.4262 5.52141C20.4262 4.65587 19.7235 3.95297 18.8582 3.95297C17.9929 3.95297 17.2903 4.65587 17.2903 5.52141C17.2903 6.38695 17.9929 7.08985 18.8582 7.08985Z"/></svg></a>
+      <a href="https://substack.com/@paulvernet" aria-label="Substack" target="_blank" rel="noopener"><svg width="21" height="24" viewBox="0 0 21 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H21V2.94698H0V0ZM0 10.7494H21V24L10.4978 18.1035L0 24V10.7494ZM0 5.37466H21V8.32164H0V5.37466Z"/></svg></a>
+    </div>
+    <p class="bio">Journaliste culturel basé à Paris &amp; actuellement en poste chez Views</p>
+    <a class="mail" href="mailto:paulvernet91620@gmail.com">paulvernet91620@gmail.com</a>
+  </footer>
+  <script src="js/trace.js"></script>
+</body>
+</html>
